@@ -10,19 +10,18 @@ REQUIRED_JOINTS = [
 class Joint(BaseModel):
     x: float = Field(..., ge=0, le=1)
     y: float = Field(..., ge=0, le=1)
-    visibility: Optional[float] = Field(default=1.0, ge=0, le=1)
+    visibility: Optional[float] = Field(1.0, ge=0, le=1)
 
 class Pose(BaseModel):
     id: str = Field(..., min_length=1)
     name: str = Field(..., min_length=1)
-    tags: List[str] = Field(..., min_length=1)
+    tags: List[str] = Field(..., min_items=1)
     standing: bool = Field(...)
     difficulty: Literal["easy", "medium", "hard"] = "easy"
     joints: Dict[str, Joint]
 
     @field_validator("tags")
-    @classmethod
-    def tags_not_empty(cls, v):
+    def tags_not_empty(cls, v: List[str]) -> List[str]:
         if not v or any(not t.strip() for t in v):
             raise ValueError("tags must be non-empty strings")
         return [t.strip().lower() for t in v]
@@ -37,10 +36,10 @@ class Pose(BaseModel):
         return self
 
 class Scene(BaseModel):
-    id: str
-    tags: List[str] = Field(..., min_length=1)
+    id: str = Field(..., min_length=1)
+    tags: List[str] = Field(..., min_items=1)
     preset: Optional[str] = None
     standing_required: bool = True
 
 class PoseCatalog(BaseModel):
-    poses: List[Pose]
+    poses: List[Pose] = Field(..., min_items=1)
