@@ -1,0 +1,24 @@
+{
+  "id": "test_workflow_pose",
+  "name": "Test Workflow Pose",
+  "category": "test",
+  "description": "Test pose to verify CI/CD workflow is running",
+  "difficulty": "easy",
+  "joints": {
+    "nose": [0.5, 0.2],
+    "left_shoulder": [0.4, 0.3],
+    "right_shoulder": [0.6, 0.3],
+    "left_elbow": [0.35, 0.45],
+    "right_elbow": [0.65, 0.45],
+    "left_wrist": [0.3, 0.6],
+    "right_wrist": [0.7, 0.35],
+    "left_hip": [0.42, 0.6],
+    "right_hip": [0.58, 0.6],
+    "left_knee": [0.42, 0.8],
+    "right_knee": [0.58, 0.8],
+    "left_ankle": [0.42, 0.95],
+    "right_ankle": [0.58, 0.95]
+  },
+  "tips": ["This is a test pose", "For workflow verification"],
+  "tags": ["test", "workflow", "ci"]
+}
